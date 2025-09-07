@@ -4,3 +4,18 @@ dotenv==0.9.9
 python-dotenv==1.1.1
 sqlparse==0.5.3
 typing_extensions==4.15.0
+
+# Core OCR and image processing
+pytesseract
+opencv-python
+Pillow
+
+# PDF processing
+pdfplumber
+pdf2image
+
+# Data handling and output
+pandas
+
+# Additional dependencies
+numpy
