@@ -1,8 +1,13 @@
-asgiref==3.9.1
-Django==4.2.24
-dotenv==0.9.9
-python-dotenv==1.1.1
-sqlparse==0.5.3
+asgiref
+Django
+django-cors-headers
+djangorestframework
+djangorestframework-simplejwt
+PyJWT
+pytz
+sqlparse
+psycopg2-binary
+python-dotenv
 typing_extensions==4.15.0
 
 # Core OCR and image processing

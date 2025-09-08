@@ -5,7 +5,7 @@ function Layout({ children }) {
   return (
     <div className="d-flex">
       <SideMenu />
-      <div className="flex-grow-1 p-3 p-5">
+      <div className="flex-grow-1 p-5">
         {children}
       </div>
     </div>
