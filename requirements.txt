@@ -19,3 +19,6 @@ pandas
 
 # Additional dependencies
 numpy
+
+#Google Cloud
+google-cloud-documentai
