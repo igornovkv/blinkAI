@@ -56,7 +56,6 @@ function Home() {
         ))}
       </div>
 
-      {/* Hidden file input for camera / upload */}
       <input
         type="file"
         id="fileInput"
