@@ -11,8 +11,9 @@ function Home() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/api/upload", {
+      const response = await fetch("/api/upload/", {
         method: "POST",
+        headers: {Authorization: `Bearer ${localStorage.getItem("access")}`},
         body: formData,
       });
 
@@ -59,7 +60,7 @@ function Home() {
       <input
         type="file"
         id="fileInput"
-        accept="image/*"
+        accept="*"
         capture="environment"
         style={{ display: "none" }}
         onChange={handleFileUpload}

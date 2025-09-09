@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 function Dashboard() {
   return (
     <Layout>
-      <h1>Dashboard 🚀</h1>
+      <h1>Your numbers 💰</h1>
     </Layout>
   );
 }
