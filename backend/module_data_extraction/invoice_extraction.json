@@ -1,0 +1,25 @@
+{
+  "total_cost": "7074.34",
+  "invoice_id": "151724",
+  "invoice_date": "26 August 2025",
+  "vendor_name": "hello@uk3pl.com",
+  "customer_name": "GB264123623",
+  "extraction_status": "success",
+  "all_entities_found": {
+    "due_date": "24 August 2025",
+    "invoice_date": "26 August 2025",
+    "invoice_id": "151724",
+    "total_amount": "7074.34",
+    "net_amount": "7,074.34",
+    "total_tax_amount": "7,074.34",
+    "supplier_email": "hello@uk3pl.com",
+    "receiver_tax_id": "GB264123623",
+    "supplier_phone": "0800 112 3693",
+    "supplier_address": "8500 DECARIE BLVD. 7TH FLOOR\nMONTREAL\n, \nH4P \n2N2\nCanada",
+    "supplier_website": "www.uk3pl.com",
+    "receiver_name": "UK3PL Ltd",
+    "receiver_address": "Grappenhall Lane Warrington, WA4 4QT",
+    "supplier_name": "earth\nrated",
+    "line_item": "ORDER FEE 11.10 11.10"
+  }
+}
