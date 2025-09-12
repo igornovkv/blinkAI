@@ -1,24 +1,24 @@
 import { useState } from "react";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
-import LoadingIndicator from "./LoadingIndicator";
 
 function Form({ route, method }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const navigate = useNavigate();
-
-    const name = method === "login" ? "Login" : "Register";
-
+    
+    const name = method === "login" ? "Log In" : "Register";
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
+        setError("");
+        
         try {
             const res = await api.post(route, { username, password });
-
             if (method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
@@ -27,47 +27,101 @@ function Form({ route, method }) {
                 navigate("/login");
             }
         } catch (error) {
-            alert("Error: " + error.response?.data?.detail || "Something went wrong");
+            setError(error.response?.data?.detail || "Something went wrong");
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="container d-flex align-items-center justify-content-center min-vh-100">
-            <form onSubmit={handleSubmit} className="bg-light p-5 rounded" style={{ minWidth: "350px" }}>
-                <h1>{name}</h1>
-
-                <div className="mb-3">
-                    <label htmlFor="username" className="form-label">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        className="form-control"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
+        <div className="container-fluid d-flex align-items-center justify-content-center min-vh-100 py-4">
+            <div className="row w-100 justify-content-center">
+                <div className="col-12 col-sm-8 col-md-6 col-lg-4">
+                    <div className="card shadow-sm">
+                        <div className="card-body p-4 p-md-5">
+                            <div className="text-center mb-4">
+                                <h1 className="h3 mb-3">{name}</h1>
+                            </div>
+                            
+                            <form onSubmit={handleSubmit}>
+                                {error && (
+                                    <div className="alert alert-danger" role="alert" id="error-message">
+                                        {error}
+                                    </div>
+                                )}
+                                
+                                <div className="form-floating mb-3">
+                                    <input
+                                        type="text"
+                                        id="username"
+                                        className={`form-control ${error ? 'is-invalid' : ''}`}
+                                        placeholder="Username"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        disabled={loading}
+                                        required
+                                        autoComplete={method === "login" ? "username" : "new-username"}
+                                        aria-describedby={error ? "error-message" : undefined}
+                                    />
+                                    <label htmlFor="username">Username</label>
+                                </div>
+                                
+                                <div className="form-floating mb-4">
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        className={`form-control ${error ? 'is-invalid' : ''}`}
+                                        placeholder="Password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        disabled={loading}
+                                        required
+                                        autoComplete={method === "login" ? "current-password" : "new-password"}
+                                        minLength={method === "register" ? 8 : undefined}
+                                        aria-describedby={error ? "error-message" : undefined}
+                                    />
+                                    <label htmlFor="password">Password</label>
+                                </div>
+                                
+                                <button 
+                                    className="btn btn-dark w-100 py-2 mb-3" 
+                                    type="submit"
+                                    disabled={loading || !username || !password}
+                                >
+                                    {loading ? (
+                                        <>
+                                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                            {method === "login" ? "Signing in..." : "Creating account..."}
+                                        </>
+                                    ) : (
+                                        name
+                                    )}
+                                </button>
+                            </form>
+                            
+                            <hr className="my-4" />
+                            
+                            <div className="text-center">
+                                {method === "login" ? (
+                                    <p className="mb-0">
+                                        Don't have an account?{" "}
+                                        <Link to="/register" className="text-decoration-none fw-medium">
+                                            Sign up
+                                        </Link>
+                                    </p>
+                                ) : (
+                                    <p className="mb-0">
+                                        Already have an account?{" "}
+                                        <Link to="/login" className="text-decoration-none fw-medium">
+                                            Sign in
+                                        </Link>
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        className="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-
-                {loading && <LoadingIndicator />}
-
-                <button className="btn btn-dark w-100" type="submit">
-                    {name}
-                </button>
-            </form>
+            </div>
         </div>
     );
 }
