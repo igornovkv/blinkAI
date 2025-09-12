@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { getCurrentUsername } from "../auth";
 import Layout from "../components/Layout";
 import Card from "../components/Card";
 
 function Home() {
+  const displayName = useMemo(() => getCurrentUsername() || "there", []);
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -50,7 +52,7 @@ function Home() {
 
   return (
     <Layout>
-      <h1 className="mb-5">Hi Igor 👋🏻</h1>
+      <h1 className="mb-5">Hi {displayName} 👋🏻</h1>
       <div className="d-flex flex-wrap gap-3">
         {cardsData.map((card, index) => (
           <Card key={index} title={card.title} text={card.text} custom={card.custom}/>
