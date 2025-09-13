@@ -1,0 +1,7 @@
+# consult website
+cd frontend
+npm run dev
+
+#run backend
+cd backend
+python manage.py runserver
