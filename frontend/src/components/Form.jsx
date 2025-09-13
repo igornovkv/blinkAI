@@ -33,7 +33,6 @@ function Form({ route, method }) {
             setLoading(false);
         }
     };
-
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center min-vh-100 py-4">
             <div className="row w-100 justify-content-center">
@@ -124,14 +123,14 @@ function Form({ route, method }) {
                                     {method === "login" ? (
                                         <p className="mb-0">
                                             Don't have an account?{" "}
-                                            <Link to="/register" className="text-decoration-none fw-medium">
+                                            <Link to="/register" className="text-dark text-decoration-underline fw-medium">
                                                 Sign up
                                             </Link>
                                         </p>
                                     ) : (
                                         <p className="mb-0">
                                             Already have an account?{" "}
-                                            <Link to="/login" className="text-decoration-none fw-medium">
+                                            <Link to="/login" className="text-dark text-decoration-underline fw-medium">
                                                 Sign in
                                             </Link>
                                         </p>
